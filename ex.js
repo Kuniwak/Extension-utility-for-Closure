@@ -10,23 +10,6 @@ goog.provide('orga.ex');
 goog.provide('orga.ex.EnvironmentType');
 
 
-/**
- * The constant means environment where the script runs on.
- * For example, if you want this script runing on Chrome extension background
- * page, change the value 0. See {@link orga.EnvironmentType}.
- * Environment:
- * <ul>
- * <li> Default: 0x00,
- * <li> Chrome extension: 0x10,
- * <li> Safari extension: 0x20,
- * <li> Opera extension: 0x20,
- * <li> Greasemonkey: 0x30,
- * </ul>
- * @define {number} The constant means anywhere on the script runs on.
- */
-orga.ex.ENVIRONMENT = orga.ex.getEnvironment();
-
-
 /** @enum {number} */
 orga.ex.EnvironmentType = {
   /** @const */
@@ -38,7 +21,9 @@ orga.ex.EnvironmentType = {
   /** @const */
   OPERA_EX: 0x30,
   /** @const */
-  GREASEMONKEY: 0x40,
+  FIREFOX_EX: 0x40,
+  /** @const */
+  GREASEMONKEY: 0x50,
 };
 
 
@@ -65,7 +50,7 @@ orga.ex.getEnvironment = function() {
  * @return {boolean} Whether the script is a Chrome extension script.
  */
 orga.ex.isChromeExtension = function() {
-  return goog.isObject(chrome) && goog.isObject(chrome.extension);
+  return goog.isObject(window.chrome) && goog.isObject(window.chrome.extension);
 };
 
 
@@ -100,8 +85,8 @@ orga.ex.isChromeExtensionBackgroundPage = function() {
 /**
  * @return {boolean} Whether the script is a GreaseMonkey script.
  */
-orga.ex.isGreaseMonkey = function() {
-  return goog.isFunction(GM_LOG);
+orga.ex.isGreasemonkey = function() {
+  return goog.isFunction(window.GM_LOG);
 };
 
 
@@ -109,7 +94,7 @@ orga.ex.isGreaseMonkey = function() {
  * @return {boolean} Whether the script is a FireFox extension script.
  */
 orga.ex.isFirefoxExtension = function() {
-    return goog.isObject(chlorine);
+    return goog.isObject(window.chlorine);
 };
 
 
@@ -117,7 +102,8 @@ orga.ex.isFirefoxExtension = function() {
  * @return {boolean} Whether the script is a Safari extension.
  */
 orga.ex.isSafariExtension = function() {
-    return goog.isObject(safari) && goog.isObject(safari.extension);
+    return goog.isObject(window.safari) &&
+        goog.isObject(window.safari.extension);
 };
 
 
@@ -126,7 +112,7 @@ orga.ex.isSafariExtension = function() {
  */
 orga.ex.isSafariExtensionGlobalPage = function() {
     return orga.ex.isSafariExtension() &&
-        goog.isObject(safari.extension.globalPage) &&
+        goog.isObject(window.safari.extension.globalPage) &&
         window === safari.extension.globalPage.contentWindow;
 };
 
@@ -135,7 +121,7 @@ orga.ex.isSafariExtensionGlobalPage = function() {
  * @return {boolean} Whether the script is a Opera extension.
  */
 orga.ex.isOperaExtension = function() {
-    return goog.isObject(opera) && goog.isObject(opera.extension);
+    return goog.isObject(window.opera) && goog.isObject(window.opera.extension);
 };
 
 
@@ -146,3 +132,20 @@ orga.ex.isOperaExtension = function() {
 orga.ex.isOperaExtensionBackgroundProcess = function() {
     return orga.ex.isOperaExtension() && goog.isObject(opera.contexts);
 };
+
+
+/**
+ * The constant means environment where the script runs on.
+ * For example, if you want this script runing on Chrome extension background
+ * page, change the value 0. See {@link orga.EnvironmentType}.
+ * Environment:
+ * <ul>
+ * <li> Default: 0x00,
+ * <li> Chrome extension: 0x10,
+ * <li> Safari extension: 0x20,
+ * <li> Opera extension: 0x20,
+ * <li> Greasemonkey: 0x30,
+ * </ul>
+ * @define {number} The constant means anywhere on the script runs on.
+ */
+orga.ex.ENVIRONMENT = orga.ex.getEnvironment();
