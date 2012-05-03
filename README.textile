@@ -1,7 +1,7 @@
-h1. JS-develop-utility
+h1. Extension-utility-for-Closure
 
-"Here":https://github.com/OrgaChem/JS-develop-utility/blob/master/README_Ja.textile is a README for Japanese.
-日本語のREADMEは "こちら":https://github.com/OrgaChem/JS-develop-utility/blob/master/README_Ja.textile
+"Here":https://github.com/OrgaChem/Extension-utility-for-Closure/blob/master/README_Ja.textile is a README for Japanese.
+日本語のREADMEは "こちら":https://github.com/OrgaChem/Extension-utility-for-Closure/blob/master/README_Ja.textile
 
 
 h2. Abstract
@@ -10,4 +10,4 @@ h2. Abstract
 
 h2. API Reference
 
-Show the "Wiki":https://github.com/OrgaChem/JS-develop-utility/wiki/API-Reference .
+Show the "Wiki":https://github.com/OrgaChem/Extension-utility-for-Closure/wiki/API-Reference .
